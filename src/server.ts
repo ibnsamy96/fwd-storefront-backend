@@ -6,7 +6,6 @@ import appConfig from './config/app.config'
 import orderRoutes from './handlers/orders'
 import productRoutes from './handlers/product'
 import userRoutes from './handlers/users'
-import dashboardRoutes from './handlers/dashboard'
 
 const AppName = appConfig.name || 'App'
 const PORT = appConfig.port || 3000
@@ -26,7 +25,6 @@ app.get('/', (req: Request, res: Response) => {
 productRoutes(app)
 userRoutes(app)
 orderRoutes(app)
-dashboardRoutes(app)
 
 // start express server
 app.listen(PORT, () => {
