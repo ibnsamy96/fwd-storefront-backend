@@ -12,24 +12,10 @@ export type Order = {
 export type OrderProducts = {
   product_id: Number
   quantity: number
-  order_id: undefined | number
+  order_id?: undefined | number
 }
 
 export class OrderDBModel {
-  async getUserOrders(userId: number): Promise<{ id: Number; status: string; quantity: number }[]> {
-    try {
-      const userOrdersSQL = `SELECT orders.id, orders.status, order_products.quantity
-        FROM orders
-        JOIN order_products ON orders.id = order_products.order_id
-        where orders.user_id = ($1) and orders.status = 'active'`
-
-      const userOrdersSQLResult = await applyQueryWithParams(userOrdersSQL, [userId])
-      return userOrdersSQLResult.rows
-    } catch (error) {
-      throw new Error(`Couldn't get orders. Error: ${error}`)
-    }
-  }
-
   async create(
     status: string,
     userId: number,
