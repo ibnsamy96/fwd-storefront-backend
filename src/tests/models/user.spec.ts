@@ -22,11 +22,7 @@ describe('User Model', () => {
     userObj = await user.create('firstName', 'lastName', 'password')
     const comparePass = bcrypt.compareSync(`password${appConfig.bcryptPaper}`, userObj.password)
     expect(comparePass).toEqual(true)
-    const testUserObj = {
-      firstname: userObj.firstname,
-      lastname: userObj.lastname,
-      password: userObj.password
-    }
+    const { id, ...testUserObj } = userObj
     expect(testUserObj).toEqual({
       firstname: 'firstName',
       lastname: 'lastName',
@@ -46,6 +42,13 @@ describe('User Model', () => {
       await user.create('firstName', 'lastName', 'password')
     }
     const result = await user.index()
-    expect(result.length).toEqual(5)
+    // expect(result.length).toEqual(5)
+
+    result.forEach((returnedUser) => {
+      const { id, ...userInfo } = returnedUser
+      expect(userInfo.firstname).toBeDefined()
+      expect(userInfo.lastname).toBeDefined()
+      expect(userInfo.password).toBeDefined()
+    })
   })
 })
