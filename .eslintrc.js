@@ -18,13 +18,19 @@ module.exports = {
       }
     }
   },
+
   rules: {
     semi: ['error', 'never'],
     'no-console': 'off',
-    'prettier/prettier': 2,
     'no-use-before-define': ['error', { functions: true, classes: true }],
     'no-var': 'error',
     'prefer-const': 'error',
+    'prettier/prettier': [
+      'error',
+      {
+        endOfLine: 'auto'
+      }
+    ],
     'import/extensions': [
       'error',
       'ignorePackages',
