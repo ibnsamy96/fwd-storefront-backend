@@ -21,27 +21,59 @@ After downloading the project here's a couple of things you should do in order t
 
 1. install packages
 
-```
+```bash
 npm i
 ```
 
-2. rename ".env-example" file with ".env" and change your database info and the other secret info
+3. open the **psql shell** on your machine and apply its default configurations  
+   create your user with superuser privileges and create the two databases for development and testing purposes
+
+```sh
+CREATE USER fwd_store_user WITH PASSWORD 'password@123' SUPERUSER;
+```
+
+```sh
+CREATE DATABASE fwd_store_db OWNER fwd_store_user ENCODING UTF8;
+CREATE DATABASE fwd_store_test_db OWNER fwd_store_user ENCODING UTF8;
+```
+
+4. rename ".env-example" file with ".env" and change your database info and the other secret info
+
+```env
+# APP Variables
+ENV=dev
+PORT=3000
+APP_NAME='Storefront Backend'
+
+# Database Variables
+POSTGRES_HOST=localhost
+POSTGRES_PORT=5432
+POSTGRES_USER=fwd_store_user
+POSTGRES_PASSWORD=password@123
+POSTGRES_DB=fwd_store_db
+POSTGRES_TEST_DB=fwd_store_test_db
+
+# Secret Tokens
+JWT_TOKEN=secret
+SALT_ROUNDS=10
+BCRYPT_PASSWORD=password@123
+```
 
 3. run db-migarte to setup your database on port 5432 as declared in .env
 
-```
+```bash
 db-migrate up
 ```
 
-4. to run project will be running on localhost port 3000
+4. to run project will be running **on localhost port 3000**
 
-```
+```bash
 npm start
 ```
 
-5. to run unit test
+5. to run the unit tests
 
-```
+```bash
 npm test
 ```
 
@@ -108,3 +140,27 @@ npm test
     status: 'active',
     user_id: 1
     }
+
+## Data Schema
+
+#### Product
+
+- id
+- name
+- price
+- category
+
+#### User
+
+- id
+- first_name
+- last_name
+- password
+
+#### Orders
+
+- id
+- user_id
+- status of order (active or complete)
+- id of each product in the order
+- quantity of each product in the order
