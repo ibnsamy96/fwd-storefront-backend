@@ -25,7 +25,7 @@ After downloading the project here's a couple of things you should do in order t
 npm i
 ```
 
-3. open the **psql shell** on your machine and apply its default configurations  
+2. open the **psql shell** on your machine and apply its default configurations  
    create your user with superuser privileges and create the two databases for development and testing purposes
 
 ```shell
@@ -37,7 +37,7 @@ CREATE DATABASE fwd_store_db OWNER fwd_store_user ENCODING UTF8;
 CREATE DATABASE fwd_store_test_db OWNER fwd_store_user ENCODING UTF8;
 ```
 
-4. rename ".env-example" file with ".env" and change your database info and the other secret info
+3. rename ".env-example" file with ".env" and change your database info and the other secret info
 
 ```bash
 # APP Variables
@@ -59,13 +59,13 @@ SALT_ROUNDS=10
 BCRYPT_PASSWORD=password@123
 ```
 
-3. run db-migarte to setup your database on port 5432 as declared in .env
+4. run db-migrate to setup your database **on port 5432 as declared in .env**
 
 ```shell
 db-migrate up
 ```
 
-4. to run project will be running **on localhost port 3000**
+5. to run project will be running **on localhost port 3000**
 
 ```shell
 npm start
