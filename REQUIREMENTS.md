@@ -55,3 +55,10 @@ These are the notes from a meeting with the frontend developer that describe wha
 - status of order (active or complete)
 - id of each product in the order
 - quantity of each product in the order
+
+## Database Tables
+
+- products (id: serial primary key, name: varchar not null, price: int not null, category: varchar)
+- users (id: serial primary key, firstName: varchar, lastName: varchar, password: varchar)
+- orders (id: serial primary key, user_id: int[foreign key to users table], status: varchar(10)[checks its content to be 'active' or 'complete'])
+- order_products (id: serial primary key, order_id: foreign key to orders table, product_id: foreign key to products table, quantity: int)
